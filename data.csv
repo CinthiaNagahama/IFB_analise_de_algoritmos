@@ -1,5 +1,0 @@
-case;method;entries;time(ms);memory(kb)
-random_case;merge_sort;100000;461;4272
-random_case;merge_sort;1000000;3191;14876
-random_case;heap_sort;100000;184;3516
-random_case;heap_sort;1000000;1886;6940
