@@ -16,7 +16,6 @@ int main(int argc, char *argv[])
     std::string method(argv[2]);
     int entries = std::atoi(argv[3]);
 
-    // auto vec = generate_random_vector(entries, 0, 1000);
     std::vector<int> vec;
 
     std::chrono::_V2::system_clock::time_point start;
@@ -56,23 +55,6 @@ int main(int argc, char *argv[])
     std::cout << sort_case << "_case"
               << " | " << method << "_sort"
               << " | " << entries << " | " << duration.count() << std::endl;
+
+    return 0;
 }
-
-// int main()
-// {
-//     for (auto entries : generate_random_vector(5, 1000, 10000))
-//     {
-//         for (auto order : {Order::ASC, Order::DESC})
-//         {
-//             auto vec = generate_ordered_vector(entries, 0, 1000, order);
-
-//             std::cout << ((order == Order::ASC) ? "Ascendent" : "Descendent") << "(" << entries << "): ";
-//             for (auto x : vec)
-//             {
-//                 std::cout << x << " ";
-//             }
-//             std::cout << std::endl
-//                       << std::endl;
-//         }
-//     }
-// }
