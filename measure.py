@@ -1,5 +1,9 @@
 from subprocess import run
+from os import path
 import csv
+
+if not path.exists("./sort"):
+    run(["make", "build"])
 
 with open("data.csv", "w", newline="") as csv_file:
     csv_writer = csv.writer(csv_file, delimiter=";")
