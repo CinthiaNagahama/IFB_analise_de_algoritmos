@@ -70,7 +70,7 @@ if fork_pid == 0:
     while proc.returncode is None:
         rsspeak = max(get_rssize(sid), rsspeak)
         proc.poll()
-        sleep(0.05)  # Time in seconds (float)
+        sleep(0.001)  # Time in seconds (float)
 
     # print(f"memusg: rsspeak: {rsspeak}kb")
     with open("data.csv", "a", newline="") as csv_file:

@@ -12,8 +12,8 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    std::string sort_case(argv[1]);
-    std::string method(argv[2]);
+    std::string method(argv[1]);
+    std::string sort_case(argv[2]);
     int entries = std::atoi(argv[3]);
 
     std::vector<int> vec;
@@ -50,11 +50,11 @@ int main(int argc, char *argv[])
         heap_sort(vec);
     }
     auto finish = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(finish - start);
+    auto duration = std::chrono::duration_cast<std::chrono::duration<double>>(finish - start);
 
     std::cout << sort_case << "_case"
               << " | " << method << "_sort"
-              << " | " << entries << " | " << duration.count() << std::endl;
+              << " | " << entries << " | " << std::fixed << duration.count() << std::endl;
 
     return 0;
 }
