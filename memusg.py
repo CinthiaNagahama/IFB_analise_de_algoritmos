@@ -35,6 +35,7 @@ def get_rssize(sid: int) -> int:
 DEBUG = False
 try:
     child_command_name = PurePath(sys.argv[1]).name
+    sort_method = sys.argv[2]
     if sys.argv[-1] in ("-d", "--debug"):
         DEBUG = True
         child_command = sys.argv[1:-1]
@@ -72,8 +73,7 @@ if fork_pid == 0:
         proc.poll()
         sleep(0.001)  # Time in seconds (float)
 
-    # print(f"memusg: rsspeak: {rsspeak}kb")
-    with open("data.csv", "a", newline="") as csv_file:
+    with open(os.path.join(os.path.curdir, "data", f"{sort_method}_sort.csv"), "a", newline="") as csv_file:
         csv_writer = csv.writer(csv_file, delimiter=";")
         for line in proc.stdout or [""]:
             raw_line = line.strip() + " | " + str(rsspeak)
