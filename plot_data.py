@@ -8,7 +8,6 @@ mpl.style.use("seaborn")
 mpl.rcParams.update({"axes.titlesize": 18, "axes.labelsize": 16, "xtick.labelsize": 14, "ytick.labelsize": 14})
 
 bubble = pd.read_csv(path.join(path.curdir, "data", "bubble_sort.csv"))
-print(bubble)
 merge = pd.read_csv(path.join(path.curdir, "data", "merge_sort.csv"))
 heap = pd.read_csv(path.join(path.curdir, "data", "heap_sort.csv"))
 
@@ -77,8 +76,6 @@ for sort_case in ["best", "random", "worst"]:
     sorting_memory.plot.bar(
         rot=0,
         logy=True,
-        # log=True,
-        # bottom=1e3,
         xlabel="Quantidade de elementos",
         ylabel="Memória(kb)",
         title=make_title[sort_case],
