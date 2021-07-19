@@ -8,7 +8,7 @@ Este projeto visa a comparação experimental dos algoritmos de ordenação *Bub
 
 ## Métodos de ordenação
 
-Os algoritmos de ordenação foram construídos usando C++. A execução foi feita levando em conta os melhor, pior e caso médio (quando houver), usando entradas de tamanho na faixa entre: $10^4$, $10^5$, $10^6$, $10^7$, $10^8$ e $10^9$.
+Os algoritmos de ordenação foram construídos usando C++. A execução foi feita levando em conta os melhor, pior e caso médio (quando houver), usando entradas de tamanho na faixa entre: 10<sup>4</sup>, 10<sup>5</sup>, 10<sup>6</sup>, 10<sup>7</sup>, 10<sup>8</sup> e 10<sup>9</sup>.
 
 ## Análise de dados
 
