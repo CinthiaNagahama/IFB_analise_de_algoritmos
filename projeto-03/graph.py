@@ -46,7 +46,11 @@ class Graph:
 
 if __name__ == "__main__":
     g = Graph()
-    g.add("A", Edge("B", 2), Edge("C", 3, True), Edge("D", 4))
-    print(g)
-    g.remove("A")
+    g.add("1", Edge("2", 50), Edge("3", 45), Edge("4", 10, True))
+    g.add("2", Edge("4", 15), Edge("3", 10))
+    g.add("3", Edge("5", 30))
+    g.add("4", Edge("5", 15))
+    g.add("5", Edge("2", 20), Edge("3", 35))
+    g.add("6", Edge("5", 3))
+
     print(g)

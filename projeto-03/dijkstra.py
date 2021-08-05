@@ -9,7 +9,7 @@ class Dijkstra:
         self.graph = graph
         self.paths: Dict[str, Dict[str, Tuple[str, float]]] = defaultdict(dict)
 
-    def calculate_shortest_paths(self, source: str):
+    def calculate_shortest_paths(self, source: str) -> Dict[str, Tuple[str, float]]:
         if source not in self.graph:
             raise ValueError(f"vertice {source} not found in graph {self.graph}")
 
@@ -38,11 +38,11 @@ class Dijkstra:
         self.paths[source] = dict(paths)
         return dict(paths)
 
-    def build_path(self, source: str, destination: str):
+    def build_path(self, source: str, destination: str) -> str:
         if source not in self.paths:
             raise ValueError(f"There are no paths calculated from source vertice: {source}")
 
-        if destination not in self.paths.get(source).keys():
+        if destination not in self.paths[source]:
             raise ValueError(f"Destination: {destination} unreacheable from source: {source}")
 
         path: List[str] = list()
