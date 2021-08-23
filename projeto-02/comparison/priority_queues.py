@@ -13,50 +13,90 @@ from lib.fib_heap import FibonacciHeap
 qtd = (10, 100, 1000, 10000)
 text_options = (False, True)
 
-l = list()
-h = list()
-f = FibonacciHeap()
+no_heap = list()
+binary_heap = list()
+fib_heap = FibonacciHeap()
 
 with open(path.join(path.curdir, "priority_queues.csv"), "w") as priority_queues:
     csv_writer = csv.writer(priority_queues)
-    csv_writer.writerow(["Number of elements", "Additional text", "List", "Binary Heap", "Fibonacci Heap"])
+    csv_writer.writerow(["Number of elements", "Additional text", "List", "Binary Heap", "Fibonacci Heap", "Measure"])
 
     for n, text in product(qtd, text_options):
-        for _ in range(n):
-            r = random()
-
-            if text:
-                l.append((r, f"{r:.2e}"))
-                heapq.heappush(h, (r, f"{r:.2e}"))
-                f.insert(r, f"{r:.2e}")
-            else:
-                l.append(r)
-                heapq.heappush(h, r)
-                f.insert(r)
-
         print(f"For {n} numbers" if not text else f"For {n} numbers with additional text")
 
-        start_time_l = time()
-        while l:
-            _ = l.pop(l.index(min(l)))
-        print(f"\tList: {(time() - start_time_l):.2e}s")
+        time_l_insertion = time()
+        for _ in range(n):
+            r = random()
+            no_heap.append((r, f"{r:.2e}") if text else r)
+        time_l_insertion = time() - time_l_insertion
 
-        start_time_h = time()
-        while h:
-            _ = heapq.heappop(h)
-        print(f"\tBinary Heap: {(time() - start_time_h):.2e}s")
+        time_l_deletion = time()
+        while no_heap:
+            _ = no_heap.pop(no_heap.index(min(no_heap)))
+        time_l_deletion = time() - time_l_deletion
 
-        start_time_f = time()
-        while f.total_nodes > 0:
-            _ = f.extract_min()
-        print(f"\tFibonacci Heap n°2: {(time() - start_time_f):.2e}s", end="\n\n")
+        print("\tList:")
+        print(f"\t\tInsertion: {time_l_insertion:.2e}")
+        print(f"\t\tDeletion: {time_l_deletion:.2e}")
+        print(f"\t\tInsertion and deletion: {(time_l_insertion + time_l_deletion):.2e}")
 
-        csv_writer.writerow(
+        time_h_insertion = time()
+        for _ in range(n):
+            r = random()
+            heapq.heappush(binary_heap, (r, f"{r:.2e}") if text else r)
+        time_h_insertion = time() - time_h_insertion
+
+        time_h_deletion = time()
+        while binary_heap:
+            _ = heapq.heappop(binary_heap)
+        time_h_deletion = time() - time_h_deletion
+
+        print("\tBinary Heap:")
+        print(f"\t\tInsertion: {time_h_insertion:.2e}")
+        print(f"\t\tDeletion: {time_h_deletion:.2e}")
+        print(f"\t\tInsertion and deletion: {(time_h_insertion + time_h_deletion):.2e}")
+
+        time_f_insertion = time()
+        for _ in range(n):
+            r = random()
+            fib_heap.insert(r, f"{r:.2e}" if text else None)
+        time_f_insertion = time() - time_f_insertion
+
+        time_f_deletion = time()
+        while fib_heap.total_nodes > 0:
+            _ = fib_heap.extract_min()
+        time_f_deletion = time() - time_f_deletion
+
+        print("\tFibonacci Heap:")
+        print(f"\t\tInsertion: {time_f_insertion:.2e}")
+        print(f"\t\tDeletion: {time_f_deletion:.2e}")
+        print(f"\t\tInsertion and deletion: {(time_f_insertion + time_f_deletion):.2e}")
+
+        csv_writer.writerows(
             [
-                n,
-                "Yes" if text else "No",
-                f"{(time() - start_time_l):.2e}s",
-                f"{(time() - start_time_h):.2e}s",
-                f"{(time() - start_time_f):.2e}s",
+                [
+                    n,
+                    "Yes" if text else "No",
+                    f"{time_l_insertion:.2e}",
+                    f"{time_h_insertion:.2e}",
+                    f"{time_f_insertion:.2e}",
+                    "insertion",
+                ],
+                [
+                    n,
+                    "Yes" if text else "No",
+                    f"{time_l_deletion:.2e}",
+                    f"{time_h_deletion:.2e}",
+                    f"{time_f_deletion:.2e}",
+                    "deletion",
+                ],
+                [
+                    n,
+                    "Yes" if text else "No",
+                    f"{(time_l_insertion + time_l_deletion):.2e}",
+                    f"{(time_h_insertion + time_h_deletion):.2e}",
+                    f"{(time_f_insertion + time_f_deletion):.2e}",
+                    "insertion and deletion",
+                ],
             ]
         )
