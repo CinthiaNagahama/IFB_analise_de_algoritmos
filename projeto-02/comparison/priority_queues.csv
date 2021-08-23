@@ -1,0 +1,9 @@
+Number of elements,Additional text,List,Binary Heap,Fibonacci Heap
+10,No,1.85e-04s,1.43e-04s,1.20e-04s
+10,Yes,2.43e-04s,1.54e-04s,1.29e-04s
+100,No,1.81e-03s,1.65e-03s,1.51e-03s
+100,Yes,2.30e-03s,1.92e-03s,1.84e-03s
+1000,No,3.92e-02s,2.70e-02s,2.66e-02s
+1000,Yes,4.79e-02s,2.60e-02s,2.53e-02s
+10000,No,8.50e-01s,2.84e-01s,2.82e-01s
+10000,Yes,2.02e+00s,2.30e-01s,2.23e-01s
