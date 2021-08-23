@@ -1,5 +1,6 @@
 from collections import defaultdict
 from typing import Dict, List, Tuple
+import time
 import sys
 
 sys.path.append("../../projeto-02")
@@ -68,11 +69,15 @@ if __name__ == "__main__":
     g.add("5", Edge("2", 20), Edge("3", 35))
     g.add("6", Edge("5", 3))
 
+    exec_time = time.time()
     d = Dijkstra(g)
     d.calculate_shortest_paths("1")
+    exec_time = time.time() - exec_time
 
     for v in g:
         try:
             print(d.build_path("1", v))
         except Exception as e:
             print(e)
+
+    print(f"\nExecution time: {exec_time}s")

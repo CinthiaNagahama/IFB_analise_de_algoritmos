@@ -1,11 +1,12 @@
 from collections import defaultdict
 from typing import Dict, List, Tuple
-import fibheap
+import time
 import sys
 
 sys.path.append("../../projeto-02")
 
 from graph import Graph, Edge
+from lib.fib_heap import FibonacciHeap
 
 
 class Dijkstra:
@@ -22,11 +23,12 @@ class Dijkstra:
 
         visited_vertices: List[str] = list()
 
-        vertices_queue = fibheap.makefheap()
-        fibheap.fheappush(vertices_queue, (0, source))
+        vertices_queue = FibonacciHeap()
+        vertices_queue.insert(0, source)
 
-        while vertices_queue.num_nodes > 0:
-            accumulated_distance, current_vertice = fibheap.fheappop(vertices_queue)
+        while vertices_queue.total_nodes > 0:
+            min_node = vertices_queue.extract_min()
+            accumulated_distance, current_vertice = min_node.key, min_node.value
             if current_vertice in visited_vertices:
                 continue
 
@@ -35,7 +37,7 @@ class Dijkstra:
                 if new_distance < paths[next_vertice][1]:
                     paths[next_vertice] = current_vertice, new_distance
 
-                fibheap.fheappush(vertices_queue, (new_distance, next_vertice))
+                vertices_queue.insert(new_distance, next_vertice)
 
             visited_vertices.append(current_vertice)
 
@@ -68,11 +70,15 @@ if __name__ == "__main__":
     g.add("5", Edge("2", 20), Edge("3", 35))
     g.add("6", Edge("5", 3))
 
+    exec_time = time.time()
     d = Dijkstra(g)
     d.calculate_shortest_paths("1")
+    exec_time = time.time() - exec_time
 
     for v in g:
         try:
             print(d.build_path("1", v))
         except Exception as e:
             print(e)
+
+    print(f"\nExecution time: {exec_time}s")
