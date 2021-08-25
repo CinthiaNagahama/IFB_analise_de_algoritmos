@@ -33,7 +33,7 @@ if __name__ == "__main__":
             except Exception as e:
                 print(e)
 
-        print(f"\nExecution Dijkstra with list: {exec_time}s")
+        print(f"\nExecution Dijkstra with list: {exec_time:.2e}s\n")
 
         dh = DijkstraBinaryHeap(g1)
         exec_time = time()
@@ -46,7 +46,7 @@ if __name__ == "__main__":
             except Exception as e:
                 print(e)
 
-        print(f"\nExecution Dijkstra with binary heap: {exec_time}s")
+        print(f"\nExecution Dijkstra with binary heap: {exec_time:.2e}s\n")
 
         df = DijkstraFibonacciHeap(g1)
         exec_time = time()
@@ -59,7 +59,7 @@ if __name__ == "__main__":
             except Exception as e:
                 print(e)
 
-        print(f"\nExecution Dijkstra with fibonacci heap: {exec_time}s")
+        print(f"\nExecution Dijkstra with fibonacci heap: {exec_time:.2e}s\n")
 
     # Comparing dijkstra (binary heap) with bellman-ford using a graph with negative values.
 
