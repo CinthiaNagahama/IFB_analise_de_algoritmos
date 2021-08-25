@@ -1,15 +1,14 @@
 from collections import defaultdict
 from typing import Dict, List, Tuple
 import heapq
-import time
 import sys
 
 sys.path.append("../../projeto-02")
 
-from graph import Graph, Edge
+from graph import Graph
 
 
-class Dijkstra:
+class DijkstraBinaryHeap:
     def __init__(self, graph: Graph) -> None:
         self.graph = graph
         self.paths: Dict[str, Dict[str, Tuple[str, float]]] = defaultdict(dict)
@@ -58,26 +57,3 @@ class Dijkstra:
             current_step = self.paths[source][current_step][0]
 
         return " -> ".join(path[::-1])
-
-
-if __name__ == "__main__":
-    g = Graph()
-    g.add("1", Edge("2", 50), Edge("3", 45), Edge("4", 10, True))
-    g.add("2", Edge("4", 15), Edge("3", 10))
-    g.add("3", Edge("5", 30))
-    g.add("4", Edge("5", 15))
-    g.add("5", Edge("2", 20), Edge("3", 35))
-    g.add("6", Edge("5", 3))
-
-    exec_time = time.time()
-    d = Dijkstra(g)
-    d.calculate_shortest_paths("1")
-    exec_time = time.time() - exec_time
-
-    for v in g:
-        try:
-            print(d.build_path("1", v))
-        except Exception as e:
-            print(e)
-
-    print(f"\nExecution time: {exec_time}s")
