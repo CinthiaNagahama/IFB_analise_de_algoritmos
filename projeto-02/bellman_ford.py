@@ -19,13 +19,19 @@ class BellmanFord:
         vertices_list.remove(source)
         vertices_list.insert(0, source)
 
+        relaxed = True
         for _ in range(len(vertices_list) - 1):
+            if not relaxed:
+                break
+            relaxed = False
+
             for vertice in vertices_list:
                 accumulated_distance = paths[vertice][1]
                 for relaxing_vertice, distance in self.graph[vertice].items():
                     new_distance = accumulated_distance + distance
                     if new_distance < paths[relaxing_vertice][1]:
                         paths[relaxing_vertice] = vertice, new_distance
+                        relaxed = True
 
         self.paths[source] = paths
         return dict(paths)
