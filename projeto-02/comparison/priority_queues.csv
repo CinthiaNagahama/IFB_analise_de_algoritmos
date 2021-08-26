@@ -1,25 +1,16 @@
-Number of elements,Additional text,List,Binary Heap,Fibonacci Heap,Measure
-10,No,7.15e-06,4.77e-06,2.34e-05,insertion
-10,No,8.11e-06,2.86e-06,8.18e-05,deletion
-10,No,1.53e-05,7.63e-06,1.05e-04,insertion and deletion
-10,Yes,1.26e-05,9.30e-06,2.60e-05,insertion
-10,Yes,7.63e-06,3.81e-06,7.92e-05,deletion
-10,Yes,2.03e-05,1.31e-05,1.05e-04,insertion and deletion
-100,No,2.05e-05,2.29e-05,1.05e-04,insertion
-100,No,9.68e-05,1.55e-05,1.11e-03,deletion
-100,No,1.17e-04,3.84e-05,1.22e-03,insertion and deletion
-100,Yes,7.27e-05,9.42e-05,3.33e-04,insertion
-100,Yes,1.90e-04,4.12e-05,1.36e-03,deletion
-100,Yes,2.63e-04,1.35e-04,1.69e-03,insertion and deletion
-1000,No,1.67e-04,2.40e-04,2.23e-03,insertion
-1000,No,6.71e-03,2.70e-04,2.32e-02,deletion
-1000,No,6.88e-03,5.10e-04,2.54e-02,insertion and deletion
-1000,Yes,4.81e-04,7.68e-04,2.07e-03,insertion
-1000,Yes,1.99e-02,4.31e-04,2.30e-02,deletion
-1000,Yes,2.04e-02,1.20e-03,2.51e-02,insertion and deletion
-10000,No,1.64e-03,2.19e-03,1.73e-02,insertion
-10000,No,8.17e-01,3.49e-03,2.52e-01,deletion
-10000,No,8.19e-01,5.68e-03,2.69e-01,insertion and deletion
-10000,Yes,5.08e-03,6.03e-03,1.97e-02,insertion
-10000,Yes,1.71e+00,7.28e-03,2.58e-01,deletion
-10000,Yes,1.71e+00,1.33e-02,2.78e-01,insertion and deletion
+Number of elements,List,Binary Heap,Fibonacci Heap,Measure
+10,1.81e-05,1.22e-05,1.48e-04,insertion
+10,5.96e-06,4.05e-06,1.21e-04,deletion
+10,2.41e-05,1.62e-05,2.69e-04,insertion and deletion
+100,7.68e-05,1.07e-04,5.13e-04,insertion
+100,2.68e-04,4.08e-05,1.51e-03,deletion
+100,3.45e-04,1.47e-04,2.02e-03,insertion and deletion
+1000,6.44e-04,7.09e-04,1.84e-03,insertion
+1000,1.96e-02,4.18e-04,2.32e-02,deletion
+1000,2.03e-02,1.13e-03,2.50e-02,insertion and deletion
+10000,7.14e-03,6.23e-03,2.01e-02,insertion
+10000,1.53e+00,8.08e-03,2.77e-01,deletion
+10000,1.54e+00,1.43e-02,2.97e-01,insertion and deletion
+100000,4.92e-02,5.05e-02,2.23e-01,insertion
+100000,2.22e+02,1.04e-01,3.71e+00,deletion
+100000,2.22e+02,1.55e-01,3.93e+00,insertion and deletion

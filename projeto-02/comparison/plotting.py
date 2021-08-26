@@ -9,18 +9,18 @@ mpl.rcParams.update({"axes.titlesize": 18, "axes.labelsize": 16, "xtick.labelsiz
 priority_queues_data = pd.read_csv(path.join(path.curdir, "priority_queues.csv"))
 
 priority_queues_insertion = (
-    priority_queues_data[lambda df: (df["Measure"] == "insertion") & (df["Additional text"] == "Yes")]
-    .drop(["Measure", "Additional text"], axis=1)
+    priority_queues_data[lambda df: df["Measure"] == "insertion"]
+    .drop("Measure", axis=1)
     .set_index("Number of elements")
 )
 priority_queues_deletion = (
-    priority_queues_data[lambda df: (df["Measure"] == "deletion") & (df["Additional text"] == "Yes")]
-    .drop(["Measure", "Additional text"], axis=1)
+    priority_queues_data[lambda df: df["Measure"] == "deletion"]
+    .drop("Measure", axis=1)
     .set_index("Number of elements")
 )
 priority_queues_insertion_and_deletion = (
-    priority_queues_data[lambda df: (df["Measure"] == "insertion and deletion") & (df["Additional text"] == "Yes")]
-    .drop(["Measure", "Additional text"], axis=1)
+    priority_queues_data[lambda df: df["Measure"] == "insertion and deletion"]
+    .drop("Measure", axis=1)
     .set_index("Number of elements")
 )
 
@@ -34,9 +34,9 @@ priority_queues_insertion.plot(
     title="Inserção",
     ylabel="Tempo(s)",
     xlabel="Quantidade de elementos",
-    xticks=[1e1, 1e2, 1e3, 1e4],
+    xticks=[1e1, 1e2, 1e3, 1e4, 1e5],
 ).legend(loc="upper left", frameon=True, fancybox=True, fontsize=14)
-plt.savefig(path.join(path.curdir, "graphs", "insertion.png"), bbox_inches="tight", dpi=75)
+plt.savefig(path.join(path.curdir, "graphs", "insertion.png"), bbox_inches="tight")
 
 priority_queues_deletion.plot(
     figsize=(6, 4.5),
@@ -46,9 +46,9 @@ priority_queues_deletion.plot(
     title="Deleção",
     ylabel="Tempo(s)",
     xlabel="Quantidade de elementos",
-    xticks=[1e1, 1e2, 1e3, 1e4],
+    xticks=[1e1, 1e2, 1e3, 1e4, 1e5],
 ).legend(loc="upper left", frameon=True, fancybox=True, fontsize=14)
-plt.savefig(path.join(path.curdir, "graphs", "deletion.png"), bbox_inches="tight", dpi=75)
+plt.savefig(path.join(path.curdir, "graphs", "deletion.png"), bbox_inches="tight")
 
 priority_queues_insertion_and_deletion.plot(
     figsize=(6, 4.5),
@@ -58,6 +58,6 @@ priority_queues_insertion_and_deletion.plot(
     title="Inserção e deleção",
     ylabel="Tempo(s)",
     xlabel="Quantidade de elementos",
-    xticks=[1e1, 1e2, 1e3, 1e4],
+    xticks=[1e1, 1e2, 1e3, 1e4, 1e5],
 ).legend(loc="upper left", frameon=True, fancybox=True, fontsize=14)
-plt.savefig(path.join(path.curdir, "graphs", "insertion_deletion.png"), bbox_inches="tight", dpi=75)
+plt.savefig(path.join(path.curdir, "graphs", "insertion_deletion.png"), bbox_inches="tight")

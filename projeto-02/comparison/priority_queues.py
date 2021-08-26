@@ -10,8 +10,7 @@ sys.path.append("../../projeto-02")
 
 from lib.fib_heap import FibonacciHeap
 
-qtd = (10, 100, 1000, 10000)
-text_options = (False, True)
+qtds = (1e1, 1e2, 1e3, 1e4, 1e5)
 
 no_heap = list()
 binary_heap = list()
@@ -19,15 +18,15 @@ fib_heap = FibonacciHeap()
 
 with open(path.join(path.curdir, "priority_queues.csv"), "w") as priority_queues:
     csv_writer = csv.writer(priority_queues)
-    csv_writer.writerow(["Number of elements", "Additional text", "List", "Binary Heap", "Fibonacci Heap", "Measure"])
+    csv_writer.writerow(["Number of elements", "List", "Binary Heap", "Fibonacci Heap", "Measure"])
 
-    for n, text in product(qtd, text_options):
-        print(f"For {n} numbers" if not text else f"For {n} numbers with additional text")
+    for n in [int(qtd) for qtd in qtds]:
+        print(f"For {n} numbers with additional text")
 
         time_l_insertion = time()
         for _ in range(n):
             r = random()
-            no_heap.append((r, f"{r:.2e}") if text else r)
+            no_heap.append((r, f"{r:.2e}"))
         time_l_insertion = time() - time_l_insertion
 
         time_l_deletion = time()
@@ -43,7 +42,7 @@ with open(path.join(path.curdir, "priority_queues.csv"), "w") as priority_queues
         time_h_insertion = time()
         for _ in range(n):
             r = random()
-            heapq.heappush(binary_heap, (r, f"{r:.2e}") if text else r)
+            heapq.heappush(binary_heap, (r, f"{r:.2e}"))
         time_h_insertion = time() - time_h_insertion
 
         time_h_deletion = time()
@@ -59,7 +58,7 @@ with open(path.join(path.curdir, "priority_queues.csv"), "w") as priority_queues
         time_f_insertion = time()
         for _ in range(n):
             r = random()
-            fib_heap.insert(r, f"{r:.2e}" if text else None)
+            fib_heap.insert(r, f"{r:.2e}")
         time_f_insertion = time() - time_f_insertion
 
         time_f_deletion = time()
@@ -76,7 +75,6 @@ with open(path.join(path.curdir, "priority_queues.csv"), "w") as priority_queues
             [
                 [
                     n,
-                    "Yes" if text else "No",
                     f"{time_l_insertion:.2e}",
                     f"{time_h_insertion:.2e}",
                     f"{time_f_insertion:.2e}",
@@ -84,7 +82,6 @@ with open(path.join(path.curdir, "priority_queues.csv"), "w") as priority_queues
                 ],
                 [
                     n,
-                    "Yes" if text else "No",
                     f"{time_l_deletion:.2e}",
                     f"{time_h_deletion:.2e}",
                     f"{time_f_deletion:.2e}",
@@ -92,7 +89,6 @@ with open(path.join(path.curdir, "priority_queues.csv"), "w") as priority_queues
                 ],
                 [
                     n,
-                    "Yes" if text else "No",
                     f"{(time_l_insertion + time_l_deletion):.2e}",
                     f"{(time_h_insertion + time_h_deletion):.2e}",
                     f"{(time_f_insertion + time_f_deletion):.2e}",
