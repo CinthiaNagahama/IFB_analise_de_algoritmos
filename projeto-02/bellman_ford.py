@@ -7,6 +7,7 @@ class BellmanFord:
     def __init__(self, graph: Graph) -> None:
         self.graph = graph
         self.paths: Dict[str, Dict[str, Tuple[str, float]]] = defaultdict(dict)
+        self.negative_cycle = False
 
     def calculate_shortest_paths(self, source: str) -> Dict[str, Tuple[str, float]]:
         if source not in self.graph:
@@ -33,6 +34,17 @@ class BellmanFord:
                         paths[relaxing_vertice] = vertice, new_distance
                         relaxed = True
 
+        relaxed = False
+        for vertice in vertices_list:
+            accumulated_distance = paths[vertice][1]
+            for relaxing_vertice, distance in self.graph[vertice].items():
+                new_distance = accumulated_distance + distance
+                if new_distance < paths[relaxing_vertice][1]:
+                    relaxed = True
+
+        if relaxed:
+            self.negative_cycle = True
+
         self.paths[source] = paths
         return dict(paths)
 
@@ -50,4 +62,6 @@ class BellmanFord:
             path.append(f"{current_step} ({self.paths[source][current_step][1]})")
             current_step = self.paths[source][current_step][0]
 
-        return " -> ".join(path[::-1])
+        path = " -> ".join(path[::-1])
+
+        return path if not self.negative_cycle else path + " (Warning! This graph contains a negative cycle.)"
