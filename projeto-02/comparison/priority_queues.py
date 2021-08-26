@@ -1,7 +1,6 @@
 from time import time
 from random import random
 import heapq
-from itertools import product
 import csv
 from os import path
 import sys
@@ -16,7 +15,7 @@ no_heap = list()
 binary_heap = list()
 fib_heap = FibonacciHeap()
 
-with open(path.join(path.curdir, "priority_queues.csv"), "w") as priority_queues:
+with open(path.join(path.curdir, "priority_queues2.csv"), "w") as priority_queues:
     csv_writer = csv.writer(priority_queues)
     csv_writer.writerow(["Number of elements", "List", "Binary Heap", "Fibonacci Heap", "Measure"])
 
