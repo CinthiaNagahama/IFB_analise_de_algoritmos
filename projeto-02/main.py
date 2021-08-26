@@ -161,24 +161,30 @@ if __name__ == "__main__":
         g3.add("Salvador", Edge("Teresina", 1154, True), Edge("Vitória", 1172, True))
         g3.add("São Luiz", Edge("Teresina", 433, True))
 
-        d = DijkstraBinaryHeap(g3)
-        exec_time = time()
-        d.calculate_shortest_paths("Brasília")
-        exec_time = time() - exec_time
+        exec_times = []
 
-        print(f"\nDijkstra - Execution time ({exec_time:.2e}s):")
+        for _ in range(10):
+            d = DijkstraBinaryHeap(g3)
+            start_time = time()
+            d.calculate_shortest_paths("Brasília")
+            exec_times.append(time() - start_time)
+
+        print(f"\nDijkstra - Execution time ({(sum(exec_times) / len(exec_times)):.2e}s):")
         for v in g3:
             try:
                 print("\t" + d.build_path("Brasília", v))
             except Exception as e:
                 print("\t" + e)
 
-        b = BellmanFord(g3)
-        exec_time = time()
-        b.calculate_shortest_paths("Brasília")
-        exec_time = time() - exec_time
+        exec_times.clear()
 
-        print(f"\nBellman Ford - Execution time ({exec_time:.2e}s):")
+        for _ in range(10):
+            b = BellmanFord(g3)
+            start_time = time()
+            b.calculate_shortest_paths("Brasília")
+            exec_times.append(time() - start_time)
+
+        print(f"\nBellman Ford - Execution time ({(sum(exec_times) / len(exec_times)):.2e}s):")
         for v in g3:
             try:
                 print("\t" + b.build_path("Brasília", v))
