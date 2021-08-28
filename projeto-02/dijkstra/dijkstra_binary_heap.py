@@ -20,24 +20,23 @@ class DijkstraBinaryHeap:
         paths: Dict[str, Tuple[str, float]] = defaultdict(lambda: ("", float("inf")))
         paths[source] = ("", 0)
 
-        visited_vertices: List[str] = list()
-
         vertices_queue = list()
-        heapq.heappush(vertices_queue, (0, source))
+        for v in self.graph:
+            if v == source:
+                heapq.heappush(vertices_queue, (0, v))
+            else:
+                heapq.heappush(vertices_queue, (float("inf"), v))
 
         while len(vertices_queue) > 0:
             accumulated_distance, current_vertice = heapq.heappop(vertices_queue)
-            if current_vertice in visited_vertices:
-                continue
 
             for (next_vertice, distance) in self.graph[current_vertice].items():
                 new_distance = accumulated_distance + distance
-                if new_distance < paths[next_vertice][1]:
+                old_distance = paths[next_vertice][1]
+                if new_distance < old_distance:
                     paths[next_vertice] = current_vertice, new_distance
-
-                heapq.heappush(vertices_queue, (new_distance, next_vertice))
-
-            visited_vertices.append(current_vertice)
+                    vertices_queue[vertices_queue.index((old_distance, next_vertice))] = (new_distance, next_vertice)
+                    heapq.heapify(vertices_queue)
 
         self.paths[source] = dict(paths)
         return dict(paths)

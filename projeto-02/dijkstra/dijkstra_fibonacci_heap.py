@@ -19,26 +19,25 @@ class DijkstraFibonacciHeap:
 
         paths: Dict[str, Tuple[str, float]] = defaultdict(lambda: ("", float("inf")))
         paths[source] = ("", 0)
-
-        visited_vertices: List[str] = list()
+        fib_nodes: Dict[str, FibonacciHeap.Node] = dict()
 
         vertices_queue = FibonacciHeap()
-        vertices_queue.insert(0, source)
+        for v in self.graph:
+            if v == source:
+                fib_nodes[v] = vertices_queue.insert(0, v)
+            else:
+                fib_nodes[v] = vertices_queue.insert(float("inf"), v)
 
         while vertices_queue.total_nodes > 0:
             min_node = vertices_queue.extract_min()
             accumulated_distance, current_vertice = min_node.key, min_node.value
-            if current_vertice in visited_vertices:
-                continue
 
             for (next_vertice, distance) in self.graph[current_vertice].items():
                 new_distance = accumulated_distance + distance
-                if new_distance < paths[next_vertice][1]:
+                old_distance = paths[next_vertice][1]
+                if new_distance < old_distance:
                     paths[next_vertice] = current_vertice, new_distance
-
-                vertices_queue.insert(new_distance, next_vertice)
-
-            visited_vertices.append(current_vertice)
+                    vertices_queue.decrease_key(fib_nodes[next_vertice], new_distance)
 
         self.paths[source] = dict(paths)
         return dict(paths)
