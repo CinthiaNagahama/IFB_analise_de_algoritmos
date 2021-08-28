@@ -1,5 +1,5 @@
 from collections import defaultdict
-from typing import Dict, List, Tuple
+from typing import Dict, List, Set, Tuple
 import sys
 
 sys.path.append("../../projeto-02")
@@ -19,25 +19,29 @@ class DijkstraList:
         paths: Dict[str, Tuple[str, float]] = defaultdict(lambda: ("", float("inf")))
         paths[source] = ("", 0)
 
+        vertices_dict: Dict[str, Tuple[float, str]] = dict()
         vertices_queue: List[Tuple[float, str]] = list()
-        for v in self.graph:
-            if v == source:
-                vertices_queue.append((0, v))
-            else:
-                vertices_queue.append((float("inf"), v))
+        visited_vertices: Set[str] = set()
 
-        while len(vertices_queue) > 0:
-            accumulated_distance, current_vertice = vertices_queue.pop(vertices_queue.index(min(vertices_queue)))
+        for v in self.graph:
+            shared_vertice = [float("inf"), v]
+            vertices_dict[v] = shared_vertice
+            vertices_queue.append(shared_vertice)
+
+        vertices_dict[source][0] = 0
+
+        while len(visited_vertices) < len(vertices_queue):
+            accumulated_distance, current_vertice = self._min_distance(vertices_queue, visited_vertices)
 
             for (next_vertice, distance) in self.graph[current_vertice].items():
                 new_distance = accumulated_distance + distance
                 old_distance = paths[next_vertice][1]
+
                 if new_distance < old_distance:
                     paths[next_vertice] = current_vertice, new_distance
-                    vertices_queue[vertices_queue.index((old_distance, next_vertice))] = (
-                        new_distance,
-                        next_vertice,
-                    )
+                    vertices_dict[next_vertice][0] = new_distance
+
+            visited_vertices.add(current_vertice)
 
         self.paths[source] = dict(paths)
         return dict(paths)
@@ -57,3 +61,13 @@ class DijkstraList:
             current_step = self.paths[source][current_step][0]
 
         return " -> ".join(path[::-1])
+
+    @staticmethod
+    def _min_distance(vertices: List[Tuple[float, str]], visited: Set[str]) -> Tuple[float, str]:
+        min_vertice = float("inf"), ""
+
+        for v in vertices:
+            if v[0] <= min_vertice[0] and v[1] not in visited:
+                min_vertice = v
+
+        return min_vertice

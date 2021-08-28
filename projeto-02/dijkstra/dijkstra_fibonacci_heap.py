@@ -35,6 +35,7 @@ class DijkstraFibonacciHeap:
             for (next_vertice, distance) in self.graph[current_vertice].items():
                 new_distance = accumulated_distance + distance
                 old_distance = paths[next_vertice][1]
+
                 if new_distance < old_distance:
                     paths[next_vertice] = current_vertice, new_distance
                     vertices_queue.decrease_key(fib_nodes[next_vertice], new_distance)

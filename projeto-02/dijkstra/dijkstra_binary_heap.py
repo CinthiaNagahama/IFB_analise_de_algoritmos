@@ -20,12 +20,15 @@ class DijkstraBinaryHeap:
         paths: Dict[str, Tuple[str, float]] = defaultdict(lambda: ("", float("inf")))
         paths[source] = ("", 0)
 
-        vertices_queue = list()
+        vertices_dict: Dict[str, Tuple[float, str]] = dict()
+        vertices_queue: List[Tuple[float, str]] = list()
+
         for v in self.graph:
-            if v == source:
-                heapq.heappush(vertices_queue, (0, v))
-            else:
-                heapq.heappush(vertices_queue, (float("inf"), v))
+            shared_vertice = [float("inf"), v]
+            vertices_dict[v] = shared_vertice
+            heapq.heappush(vertices_queue, shared_vertice)
+
+        vertices_dict[source][0] = 0
 
         while len(vertices_queue) > 0:
             accumulated_distance, current_vertice = heapq.heappop(vertices_queue)
@@ -33,9 +36,10 @@ class DijkstraBinaryHeap:
             for (next_vertice, distance) in self.graph[current_vertice].items():
                 new_distance = accumulated_distance + distance
                 old_distance = paths[next_vertice][1]
+
                 if new_distance < old_distance:
                     paths[next_vertice] = current_vertice, new_distance
-                    vertices_queue[vertices_queue.index((old_distance, next_vertice))] = (new_distance, next_vertice)
+                    vertices_dict[next_vertice][0] = new_distance
                     heapq.heapify(vertices_queue)
 
         self.paths[source] = dict(paths)
@@ -56,3 +60,10 @@ class DijkstraBinaryHeap:
             current_step = self.paths[source][current_step][0]
 
         return " -> ".join(path[::-1])
+
+
+if __name__ == "__main__":
+    g = Graph.random_generator(10, 0.5)
+    d = DijkstraBinaryHeap(g)
+    d.calculate_shortest_paths("0")
+    # print(d.build_path("A", "B"))
