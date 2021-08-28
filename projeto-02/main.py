@@ -6,9 +6,9 @@ from graph import Edge, Graph
 from time import time
 
 if __name__ == "__main__":
-    RUN_PART_1 = True
+    RUN_PART_1 = False
     RUN_PART_2 = False
-    RUN_PART_3 = False
+    RUN_PART_3 = True
 
     # Comparing the different implementations of Dijkstra algorithm,
     # using a list, a binary heap, and a fibinacci heap.
@@ -164,7 +164,7 @@ if __name__ == "__main__":
         exec_times = []
 
         for _ in range(10):
-            d = DijkstraBinaryHeap(g3)
+            d = DijkstraList(g3)
             start_time = time()
             d.calculate_shortest_paths("Brasília")
             exec_times.append(time() - start_time)
