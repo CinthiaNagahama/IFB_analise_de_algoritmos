@@ -6,9 +6,9 @@ from graph import Edge, Graph
 from time import time
 
 if __name__ == "__main__":
-    RUN_PART_1 = False
+    RUN_PART_1 = True
     RUN_PART_2 = False
-    RUN_PART_3 = True
+    RUN_PART_3 = False
 
     # Comparing the different implementations of Dijkstra algorithm,
     # using a list, a binary heap, and a fibinacci heap.
@@ -16,9 +16,9 @@ if __name__ == "__main__":
     if RUN_PART_1:
         g1 = Graph()
         g1.add("A", Edge("B", 50), Edge("C", 45), Edge("D", 10, True))
-        g1.add("B", Edge("D", 15), Edge("C", 10))
+        g1.add("B", Edge("C", 10))
         g1.add("C", Edge("E", 30))
-        g1.add("D", Edge("E", 15))
+        g1.add("D", Edge("B", 15), Edge("E", 15))
         g1.add("E", Edge("B", 20), Edge("C", 35))
         g1.add("F", Edge("E", 3))
 
