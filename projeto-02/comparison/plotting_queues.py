@@ -40,7 +40,7 @@ priority_queues_100_100_to_1000 = (
     .drop("Density (%)", axis=1)
 )
 
-makedirs(path.join(path.curdir, "graphs"), exist_ok=True)
+makedirs(path.join(path.curdir, "graphs", "priority_queues"), exist_ok=True)
 
 priority_queues_25_10_to_100.plot(
     style=["-o", "-s", "-D"],
@@ -50,12 +50,13 @@ priority_queues_25_10_to_100.plot(
     title="Densidade: 25%",
     xticks=[(x + 1) * 1e1 for x in range(10)],
     ylim=(-5e-4, 4e-3),
+    linewidth=2,
 ).legend(loc="upper left", frameon=True, fancybox=True, fontsize=14)
 
 ylocs, _ = plt.yticks()
 plt.yticks(ylocs, [f"{(loc * 1000):.1f}" for loc in ylocs])
 
-plt.savefig(path.join(path.curdir, "graphs", "25_10_100.png"), bbox_inches="tight")
+plt.savefig(path.join(path.curdir, "graphs", "priority_queues", "25_10_100.png"), bbox_inches="tight")
 
 priority_queues_50_10_to_100.plot(
     style=["-o", "-s", "-D"],
@@ -65,12 +66,13 @@ priority_queues_50_10_to_100.plot(
     title="Densidade: 50%",
     xticks=[(x + 1) * 1e1 for x in range(10)],
     ylim=(-5e-4, 4e-3),
+    linewidth=2,
 ).legend(loc="upper left", frameon=True, fancybox=True, fontsize=14)
 
 ylocs, _ = plt.yticks()
 plt.yticks(ylocs, [f"{(loc * 1000):.1f}" for loc in ylocs])
 
-plt.savefig(path.join(path.curdir, "graphs", "50_10_100.png"), bbox_inches="tight")
+plt.savefig(path.join(path.curdir, "graphs", "priority_queues", "50_10_100.png"), bbox_inches="tight")
 
 priority_queues_100_10_to_100.plot(
     style=["-o", "-s", "-D"],
@@ -80,12 +82,13 @@ priority_queues_100_10_to_100.plot(
     title="Densidade: 100%",
     xticks=[(x + 1) * 1e1 for x in range(10)],
     ylim=(-5e-4, 4e-3),
+    linewidth=2,
 ).legend(loc="upper left", frameon=True, fancybox=True, fontsize=14)
 
 ylocs, _ = plt.yticks()
 plt.yticks(ylocs, [f"{(loc * 1000):.1f}" for loc in ylocs])
 
-plt.savefig(path.join(path.curdir, "graphs", "100_10_100.png"), bbox_inches="tight")
+plt.savefig(path.join(path.curdir, "graphs", "priority_queues", "100_10_100.png"), bbox_inches="tight")
 
 priority_queues_25_100_to_1000.plot(
     style=["-o", "-s", "-D"],
@@ -95,12 +98,13 @@ priority_queues_25_100_to_1000.plot(
     title="Densidade: 25%",
     xticks=[(x + 1) * 1e2 for x in range(10)],
     ylim=(-5e-2, 7e-1),
+    linewidth=2,
 ).legend(loc="upper left", frameon=True, fancybox=True, fontsize=14)
 
 ylocs, _ = plt.yticks()
 plt.yticks(ylocs, [f"{(loc * 1000):.0f}" for loc in ylocs])
 
-plt.savefig(path.join(path.curdir, "graphs", "25_100_1000.png"), bbox_inches="tight")
+plt.savefig(path.join(path.curdir, "graphs", "priority_queues", "25_100_1000.png"), bbox_inches="tight")
 
 priority_queues_50_100_to_1000.plot(
     style=["-o", "-s", "-D"],
@@ -110,12 +114,13 @@ priority_queues_50_100_to_1000.plot(
     title="Densidade: 50%",
     xticks=[(x + 1) * 1e2 for x in range(10)],
     ylim=(-5e-2, 7e-1),
+    linewidth=2,
 ).legend(loc="upper left", frameon=True, fancybox=True, fontsize=14)
 
 ylocs, _ = plt.yticks()
 plt.yticks(ylocs, [f"{(loc * 1000):.0f}" for loc in ylocs])
 
-plt.savefig(path.join(path.curdir, "graphs", "50_100_1000.png"), bbox_inches="tight")
+plt.savefig(path.join(path.curdir, "graphs", "priority_queues", "50_100_1000.png"), bbox_inches="tight")
 
 priority_queues_100_100_to_1000.plot(
     style=["-o", "-s", "-D"],
@@ -125,9 +130,11 @@ priority_queues_100_100_to_1000.plot(
     title="Densidade: 100%",
     xticks=[(x + 1) * 1e2 for x in range(10)],
     ylim=(-5e-2, 7e-1),
+    linewidth=2,
 ).legend(loc="upper left", frameon=True, fancybox=True, fontsize=14)
 
 ylocs, _ = plt.yticks()
 plt.yticks(ylocs, [f"{(loc * 1000):.0f}" for loc in ylocs])
 
-plt.savefig(path.join(path.curdir, "graphs", "100_100_1000.png"), bbox_inches="tight")
+plt.savefig(path.join(path.curdir, "graphs", "priority_queues", "100_100_1000.png"), bbox_inches="tight")
+# plt.show()
