@@ -15,7 +15,7 @@ from dijkstra.dijkstra_fibonacci_heap import DijkstraFibonacciHeap
 # qtds = list(np.arange(10, 91, 10)) + list(np.arange(100, 1001, 100))
 qtds = list(np.arange(10, 91, 10))
 
-with open(path.join(path.curdir, "priority_queues_2.csv"), "w") as priority_queues:
+with open(path.join(path.curdir, "priority_queues.csv"), "w") as priority_queues:
     csv_writer = csv.writer(priority_queues)
     csv_writer.writerow(["Number of elements", "List", "Binary Heap", "Fibonacci Heap", "Density (%)"])
 
