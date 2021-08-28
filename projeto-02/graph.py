@@ -1,5 +1,8 @@
+from __future__ import annotations
 from collections import defaultdict
+from math import ceil
 from typing import Dict, NamedTuple
+from random import randint, sample
 
 
 class Edge(NamedTuple):
@@ -43,14 +46,41 @@ class Graph:
         for key in self.elements:
             self.elements[key].pop(vertice, dict())
 
+    @staticmethod
+    def random_generator(vertices: int, density: float) -> Graph:
+        g = Graph()
+        max_num_edges = vertices * (vertices - 1) / 2
+        num_edges = ceil(max_num_edges * density)
+        vertice_degree = ceil((vertices - 1) * num_edges / max_num_edges)
+
+        added_vertices = set()
+        range_vertice = range(vertices)
+        for src in range_vertice:
+            actual_vertice_degree = vertice_degree - len(g[str(src)].values())
+            added_vertices.add(src)
+
+            reduced_sample = set(range_vertice) - added_vertices
+            dests = sample(
+                reduced_sample,
+                actual_vertice_degree
+                if actual_vertice_degree > 0 and actual_vertice_degree <= len(reduced_sample)
+                else 0,
+            )
+
+            for dest in dests:
+                g.add(str(src), Edge(str(dest), randint(1, 999), True))
+                if len(g[str(dest)].values()) == vertice_degree:
+                    added_vertices.add(dest)
+
+        return g
+
 
 if __name__ == "__main__":
-    g = Graph()
-    g.add("1", Edge("2", 50), Edge("3", 45), Edge("4", 10, True))
-    g.add("2", Edge("4", 15), Edge("3", 10))
-    g.add("3", Edge("5", 30))
-    g.add("4", Edge("5", 15))
-    g.add("5", Edge("2", 20), Edge("3", 35))
-    g.add("6", Edge("5", 3))
+    # g = Graph.random_generator(10, 0.2)
+    # print(g)
+    # print(len(g["0"].values()))
 
-    print(g)
+    for i in (0.25, 0.5, 1):
+        g = Graph.random_generator(10, i)
+
+        print(g, end="\n\n")
