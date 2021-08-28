@@ -1,97 +1,41 @@
+from itertools import product
 from time import time
-from random import random
-import heapq
 import csv
 from os import path
 import sys
+import numpy as np
 
 sys.path.append("../../projeto-02")
 
-from lib.fib_heap import FibonacciHeap
+from graph import Graph
+from dijkstra.dijkstra_list import DijkstraList
+from dijkstra.dijkstra_binary_heap import DijkstraBinaryHeap
+from dijkstra.dijkstra_fibonacci_heap import DijkstraFibonacciHeap
 
-qtds = (1e1, 1e2, 1e3, 1e4, 1e5)
+qtds = list(np.arange(10, 91, 10)) + list(np.arange(100, 1001, 100))
 
-no_heap = list()
-binary_heap = list()
-fib_heap = FibonacciHeap()
-
-with open(path.join(path.curdir, "priority_queues2.csv"), "w") as priority_queues:
+with open(path.join(path.curdir, "priority_queues.csv"), "w") as priority_queues:
     csv_writer = csv.writer(priority_queues)
-    csv_writer.writerow(["Number of elements", "List", "Binary Heap", "Fibonacci Heap", "Measure"])
+    csv_writer.writerow(["Number of elements", "List", "Binary Heap", "Fibonacci Heap", "Density (%)"])
 
-    for n in [int(qtd) for qtd in qtds]:
-        print(f"For {n} numbers with additional text")
+    for density, n in product((0.25, 0.5, 1), [int(qtd) for qtd in qtds]):
+        print(f"{n} elements with {int(density * 100)}% of density")
+        g = Graph.random_generator(n, density)
 
-        time_l_insertion = time()
-        for _ in range(n):
-            r = random()
-            no_heap.append((r, f"{r:.2e}"))
-        time_l_insertion = time() - time_l_insertion
+        dl = DijkstraList(g)
+        dh = DijkstraBinaryHeap(g)
+        df = DijkstraFibonacciHeap(g)
 
-        time_l_deletion = time()
-        while no_heap:
-            _ = no_heap.pop(no_heap.index(min(no_heap)))
-        time_l_deletion = time() - time_l_deletion
+        time_dl = time()
+        dl.calculate_shortest_paths("0")
+        time_dl = time() - time_dl
 
-        print("\tList:")
-        print(f"\t\tInsertion: {time_l_insertion:.2e}")
-        print(f"\t\tDeletion: {time_l_deletion:.2e}")
-        print(f"\t\tInsertion and deletion: {(time_l_insertion + time_l_deletion):.2e}")
+        time_dh = time()
+        dh.calculate_shortest_paths("0")
+        time_dh = time() - time_dh
 
-        time_h_insertion = time()
-        for _ in range(n):
-            r = random()
-            heapq.heappush(binary_heap, (r, f"{r:.2e}"))
-        time_h_insertion = time() - time_h_insertion
+        time_df = time()
+        df.calculate_shortest_paths("0")
+        time_df = time() - time_df
 
-        time_h_deletion = time()
-        while binary_heap:
-            _ = heapq.heappop(binary_heap)
-        time_h_deletion = time() - time_h_deletion
-
-        print("\tBinary Heap:")
-        print(f"\t\tInsertion: {time_h_insertion:.2e}")
-        print(f"\t\tDeletion: {time_h_deletion:.2e}")
-        print(f"\t\tInsertion and deletion: {(time_h_insertion + time_h_deletion):.2e}")
-
-        time_f_insertion = time()
-        for _ in range(n):
-            r = random()
-            fib_heap.insert(r, f"{r:.2e}")
-        time_f_insertion = time() - time_f_insertion
-
-        time_f_deletion = time()
-        while fib_heap.total_nodes > 0:
-            _ = fib_heap.extract_min()
-        time_f_deletion = time() - time_f_deletion
-
-        print("\tFibonacci Heap:")
-        print(f"\t\tInsertion: {time_f_insertion:.2e}")
-        print(f"\t\tDeletion: {time_f_deletion:.2e}")
-        print(f"\t\tInsertion and deletion: {(time_f_insertion + time_f_deletion):.2e}")
-
-        csv_writer.writerows(
-            [
-                [
-                    n,
-                    f"{time_l_insertion:.2e}",
-                    f"{time_h_insertion:.2e}",
-                    f"{time_f_insertion:.2e}",
-                    "insertion",
-                ],
-                [
-                    n,
-                    f"{time_l_deletion:.2e}",
-                    f"{time_h_deletion:.2e}",
-                    f"{time_f_deletion:.2e}",
-                    "deletion",
-                ],
-                [
-                    n,
-                    f"{(time_l_insertion + time_l_deletion):.2e}",
-                    f"{(time_h_insertion + time_h_deletion):.2e}",
-                    f"{(time_f_insertion + time_f_deletion):.2e}",
-                    "insertion and deletion",
-                ],
-            ]
-        )
+        csv_writer.writerow([n, f"{time_dl:.2e}", f"{time_dh:.2e}", f"{time_df:.2e}", str(int(density * 100))])
