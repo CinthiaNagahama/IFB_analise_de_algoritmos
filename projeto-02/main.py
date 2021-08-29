@@ -6,8 +6,8 @@ from graph import Edge, Graph
 from time import time
 
 if __name__ == "__main__":
-    RUN_PART_1 = False
-    RUN_PART_2 = False
+    RUN_PART_1 = True
+    RUN_PART_2 = True
     RUN_PART_3 = True
 
     # Comparing the different implementations of Dijkstra algorithm,
@@ -61,7 +61,7 @@ if __name__ == "__main__":
 
         print(f"\nExecution Dijkstra with fibonacci heap: {exec_time:.2e}s\n")
 
-    # Comparing dijkstra (binary heap) with bellman-ford using a graph with negative values.
+    # Comparing dijkstra (list) with bellman-ford using a graph with negative values.
 
     if RUN_PART_2:
         g2 = Graph()
@@ -72,7 +72,7 @@ if __name__ == "__main__":
         g2.add("E", Edge("G", 3))
         g2.add("F", Edge("G", 3))
 
-        d = DijkstraBinaryHeap(g2)
+        d = DijkstraList(g2)
         exec_time = time()
         d.calculate_shortest_paths("A")
         exec_time = time() - exec_time
