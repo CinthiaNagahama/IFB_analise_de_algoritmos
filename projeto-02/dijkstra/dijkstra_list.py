@@ -67,7 +67,7 @@ class DijkstraList:
         min_vertice = float("inf"), ""
 
         for v in vertices:
-            if v[0] <= min_vertice[0] and v[1] not in visited:
+            if (v[0] < min_vertice[0] or min_vertice[1] == "") and v[1] not in visited:
                 min_vertice = v
 
         return min_vertice
