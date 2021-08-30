@@ -20,7 +20,6 @@ class DijkstraBinaryHeap:
         paths: Dict[str, Tuple[str, float]] = defaultdict(lambda: ("", float("inf")))
         paths[source] = ("", 0)
 
-        # vertices_dict: Dict[str, Tuple[float, str]] = dict()
         vertices_queue: List[Tuple[float, str]] = list()
         visited_vertices: Set[str] = set()
 
@@ -60,10 +59,3 @@ class DijkstraBinaryHeap:
             current_step = self.paths[source][current_step][0]
 
         return " -> ".join(path[::-1])
-
-
-if __name__ == "__main__":
-    g = Graph.random_generator(10, 0.5)
-    d = DijkstraBinaryHeap(g)
-    d.calculate_shortest_paths("0")
-    # print(d.build_path("A", "B"))
