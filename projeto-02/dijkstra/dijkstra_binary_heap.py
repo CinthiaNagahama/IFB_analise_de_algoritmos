@@ -1,5 +1,5 @@
 from collections import defaultdict
-from typing import Dict, List, Tuple
+from typing import Dict, List, Set, Tuple
 import heapq
 import sys
 
@@ -20,18 +20,17 @@ class DijkstraBinaryHeap:
         paths: Dict[str, Tuple[str, float]] = defaultdict(lambda: ("", float("inf")))
         paths[source] = ("", 0)
 
-        vertices_dict: Dict[str, Tuple[float, str]] = dict()
+        # vertices_dict: Dict[str, Tuple[float, str]] = dict()
         vertices_queue: List[Tuple[float, str]] = list()
+        visited_vertices: Set[str] = set()
 
-        for v in self.graph:
-            shared_vertice = [float("inf"), v]
-            vertices_dict[v] = shared_vertice
-            heapq.heappush(vertices_queue, shared_vertice)
+        heapq.heappush(vertices_queue, (0, source))
 
-        vertices_dict[source][0] = 0
-
-        while len(vertices_queue) > 0:
+        qtd_vertices = len(self.graph.elements.keys())
+        while len(visited_vertices) < qtd_vertices:
             accumulated_distance, current_vertice = heapq.heappop(vertices_queue)
+            if current_vertice in visited_vertices:
+                continue
 
             for (next_vertice, distance) in self.graph[current_vertice].items():
                 new_distance = accumulated_distance + distance
@@ -39,8 +38,9 @@ class DijkstraBinaryHeap:
 
                 if new_distance < old_distance:
                     paths[next_vertice] = current_vertice, new_distance
-                    vertices_dict[next_vertice][0] = new_distance
-                    heapq.heapify(vertices_queue)
+                    heapq.heappush(vertices_queue, (new_distance, next_vertice))
+
+            visited_vertices.add(current_vertice)
 
         self.paths[source] = dict(paths)
         return dict(paths)

@@ -97,7 +97,7 @@ priority_queues_25_100_to_1000.plot(
     xlabel="Quantidade de elementos",
     title="Densidade: 25%",
     xticks=[(x + 1) * 1e2 for x in range(10)],
-    ylim=(-5e-2, 7e-1),
+    ylim=(-5e-2, 3e-1),
     linewidth=2,
 ).legend(loc="upper left", frameon=True, fancybox=True, fontsize=14)
 
@@ -113,7 +113,7 @@ priority_queues_50_100_to_1000.plot(
     xlabel="Quantidade de elementos",
     title="Densidade: 50%",
     xticks=[(x + 1) * 1e2 for x in range(10)],
-    ylim=(-5e-2, 7e-1),
+    ylim=(-5e-2, 3e-1),
     linewidth=2,
 ).legend(loc="upper left", frameon=True, fancybox=True, fontsize=14)
 
@@ -129,7 +129,7 @@ priority_queues_100_100_to_1000.plot(
     xlabel="Quantidade de elementos",
     title="Densidade: 100%",
     xticks=[(x + 1) * 1e2 for x in range(10)],
-    ylim=(-5e-2, 7e-1),
+    ylim=(-5e-2, 3e-1),
     linewidth=2,
 ).legend(loc="upper left", frameon=True, fancybox=True, fontsize=14)
 

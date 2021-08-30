@@ -12,8 +12,8 @@ from dijkstra.dijkstra_list import DijkstraList
 from dijkstra.dijkstra_binary_heap import DijkstraBinaryHeap
 from dijkstra.dijkstra_fibonacci_heap import DijkstraFibonacciHeap
 
-# qtds = list(np.arange(10, 91, 10)) + list(np.arange(100, 1001, 100))
-qtds = list(np.arange(10, 91, 10))
+qtds = list(np.arange(10, 91, 10)) + list(np.arange(100, 1001, 100))
+# qtds = list(np.arange(10, 91, 10))
 
 with open(path.join(path.curdir, "priority_queues.csv"), "w") as priority_queues:
     csv_writer = csv.writer(priority_queues)

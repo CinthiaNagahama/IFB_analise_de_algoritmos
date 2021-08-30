@@ -8,7 +8,7 @@ import numpy as np
 sys.path.append("../../projeto-02")
 
 from graph import Graph
-from dijkstra.dijkstra_list import DijkstraList
+from dijkstra.dijkstra_binary_heap import DijkstraBinaryHeap
 from bellman_ford import BellmanFord
 
 qtds = list(np.arange(10, 91, 10)) + list(np.arange(100, 1001, 100))
@@ -21,16 +21,16 @@ with open(path.join(path.curdir, "algorithms.csv"), "w") as priority_queues:
     for density, n in product((0.25, 0.5, 1), [int(qtd) for qtd in qtds]):
         # print(f"{n} elements with {int(density * 100)}% of density")
         g = Graph.random_generator(n, density)
-        time_dl = []
+        time_dh = []
         time_bf = []
 
         for i in range(10):
-            dl = DijkstraList(g)
+            dh = DijkstraBinaryHeap(g)
             bf = BellmanFord(g)
 
             start_time = time()
-            dl.calculate_shortest_paths("0")
-            time_dl.append(time() - start_time)
+            dh.calculate_shortest_paths("0")
+            time_dh.append(time() - start_time)
 
             start_time = time()
             bf.calculate_shortest_paths("0")
@@ -39,7 +39,7 @@ with open(path.join(path.curdir, "algorithms.csv"), "w") as priority_queues:
         csv_writer.writerow(
             [
                 n,
-                f"{(sum(time_dl) / len(time_dl)):.2e}",
+                f"{(sum(time_dh) / len(time_dh)):.2e}",
                 f"{(sum(time_bf) / len(time_bf)):.2e}",
                 str(int(density * 100)),
             ]

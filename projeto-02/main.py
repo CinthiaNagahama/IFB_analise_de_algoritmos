@@ -6,7 +6,7 @@ from graph import Edge, Graph
 from time import time
 
 if __name__ == "__main__":
-    RUN_PART_1 = True
+    RUN_PART_1 = False
     RUN_PART_2 = True
     RUN_PART_3 = True
 
@@ -72,7 +72,7 @@ if __name__ == "__main__":
         g2.add("E", Edge("G", 3))
         g2.add("F", Edge("G", 3))
 
-        d = DijkstraList(g2)
+        d = DijkstraBinaryHeap(g2)
         exec_time = time()
         d.calculate_shortest_paths("A")
         exec_time = time() - exec_time
@@ -164,7 +164,7 @@ if __name__ == "__main__":
         exec_times = []
 
         for _ in range(10):
-            d = DijkstraList(g3)
+            d = DijkstraBinaryHeap(g3)
             start_time = time()
             d.calculate_shortest_paths("Brasília")
             exec_times.append(time() - start_time)
