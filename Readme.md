@@ -1,16 +1,23 @@
-![faculdade-logo](https://doity.com.br/media/doity/eventos/evento-13392-logo_organizador.png)
+# IFB - Análise de Algoritmos
 
-# Análise de Algoritmos
+## Período
 
-## 5º Semestre
-
-### **Professor:** Daniel Saad
+5º Semestre - 01/2021
 
 ---
+
+## Professor
+
+Daniel Saad Nogueira Nunes
+
+---
+
 
 ## Ementa
 
 Modelos computacionais. Cotas inferiores e superiores. Medidas de eficiência de algoritmos. Técnicas de projeto e análise de algoritmos. Algoritmos de ordenação e busca. Redutibilidade. Complexidade computacional. Classes de problemas. Problemas NP-completos. Tratamento de Problemas NP-difíceis
+
+---
 
 ## Bibliografia Básica
 
